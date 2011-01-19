@@ -1,24 +1,2 @@
-All programs in this directory https://github.com/rep-movsd/ghowl and subdirectories are published under the GNU General Public License as described below. 
-
-This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version. 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. 
-You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-
-
-Introduction
-============
-
-GHOWL is a framework to aid creation of parallel programs for GPGPU architectures. Initial support is for the nVidia CUDA framework. Later versions will may extend to OpenCL and DirectCompute.
-
-Rationale
-=========
-The primary disadvantages with the CUDA framework and the nvcc compiler are twofold. Firstly, the CUDA framework relies on non-standard C++ constructs, which means that such code can never be compiled without nvcc. The second disadvantage is the very speed of the nvcc compiler, which is several times slower than current C++ compilers ( gcc, MSVC etc. ). This means that an incremental compile-debug-edit cycle is not practical. The non-standard C++ syntax also causes IDEs and other tools to balk.
-
-To avoid this, GHOWL provides a set of wrapper macros and functions that let standard C++ code to be written, compiled, and run even in the abscence of the CUDA framework or even a GPU. Such code will run on the GPU when compiled with nvcc, but serially on the CPU when compiled under a normal C++ compiler.
-
-
-Structure
-=========
-Currently almost all the code is in a single monolithic C++ header file. Templates are used heavily and most classes within the file are dependent on others, so it's not possible to separate them out.
-Precompiled headers are recommended when using the library.
+GHOWL is a free C++ framework to ease creation of CUDA based programs.
 

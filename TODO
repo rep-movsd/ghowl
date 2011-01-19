@@ -1,0 +1,8 @@
+Implement all the functionality of TXY in TXYZ too
+Implement TInterpolatedView class, also wrap up Texture buffers, so we can can get interpolation for free from the GPU
+Implement copying of slices and chunks between arrays
+Implement CPU thread based emulation
+Figure out a proper build framework so that we can compile OOB on nvcc
+Implement Sort, search and etc. algorithms
+Make a more STL like feel to the classes if possible
+
