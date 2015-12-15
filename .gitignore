@@ -4,3 +4,4 @@ Bin/*
 *.suo
 test/Debug/*
 test/Release/*
+build/*
