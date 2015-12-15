@@ -92,7 +92,7 @@ cudaError_t cudaMallocPitch(void **devPtr, dword *pitch, dword w, dword h)
         return 2;
 
     // Ensure buffer pointer is a multiple of align and >= width
-    int iAligned = getAlignedValue((*(int*)(*devPtr)));
+    int iAligned = getAlignedValue(int(*devPtr));
 
     // Save the unaligned actual ptr so we can free it later
     g_AlignedPtrs[(void*)iAligned] = *devPtr;
