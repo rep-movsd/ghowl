@@ -7,6 +7,7 @@ TCudaException g_e;
 
 #ifndef __CUDACC__
 
+#include <cstdint>
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
@@ -92,14 +93,14 @@ cudaError_t cudaMallocPitch(void **devPtr, dword *pitch, dword w, dword h)
         return 2;
 
     // Ensure buffer pointer is a multiple of align and >= width
-    int iAligned = getAlignedValue(int(*devPtr));
-
+    int iAligned = getAlignedValue(reinterpret_cast<uintptr_t>(*devPtr));
+    
     // Save the unaligned actual ptr so we can free it later
-    g_AlignedPtrs[(void*)iAligned] = *devPtr;
+    g_AlignedPtrs[reinterpret_cast<void*>(iAligned)] = *devPtr;
 
     //cerr << "Allocated(" << int(*devPtr) << ") (" << iAligned << ")" << endl;
 
-    *devPtr = (void*)iAligned;
+    *devPtr = reinterpret_cast<void*>(iAligned);
     return 0;
 }
 //////////////////////////////////////////////////////////////////////////
@@ -204,23 +205,21 @@ cudaError_t cudaThreadSynchronize()
 
 cudaError_t cudaGetDeviceProperties(cudaDeviceProp* prop, int iDev)
 {
-    strcpy(prop->name, "GeForce GTX 285");   ///< ASCII string identifying device
+    // Fake our GPU props
+    strcpy(prop->name, "GeForce GTX 285");  ///< ASCII string identifying device
     prop->totalGlobalMem = 256 * 1048576;   ///< Global memory available on device in bytes
     prop->sharedMemPerBlock = 16384;        ///< Shared memory available per block in bytes
     prop->regsPerBlock = 16384;             ///< 32-bit registers available per block
     prop->warpSize = 32;                    ///< Warp size in threads
     prop->memPitch = 262144;                ///< Maximum pitch in bytes allowed by memory copies
     prop->maxThreadsPerBlock = 512;         ///< Maximum number of threads per block
-    prop->maxThreadsDim[0] = 512;                 ///< Maximum size of each dimension of a block
-    prop->maxThreadsDim[1] = 512;                 ///< Maximum size of each dimension of a block
-    prop->maxThreadsDim[2] = 64;                 ///< Maximum size of each dimension of a block
-
-
-    prop->maxGridSize[0] = 65536;                   ///< Maximum size of each dimension of a grid
-    prop->maxGridSize[1] = 65536;                   ///< Maximum size of each dimension of a grid
-    prop->maxGridSize[2] = 1;                   ///< Maximum size of each dimension of a grid
-
-    prop->clockRate;                        ///< Clock frequency in kilohertz
+    prop->maxThreadsDim[0] = 512;           ///< Maximum size of each dimension of a block
+    prop->maxThreadsDim[1] = 512;           ///< Maximum size of each dimension of a block
+    prop->maxThreadsDim[2] = 64;            ///< Maximum size of each dimension of a block
+    prop->maxGridSize[0] = 65536;           ///< Maximum size of each dimension of a grid
+    prop->maxGridSize[1] = 65536;           ///< Maximum size of each dimension of a grid
+    prop->maxGridSize[2] = 1;               ///< Maximum size of each dimension of a grid
+    prop->clockRate = 1048576;              ///< Clock frequency in kilohertz
     prop->totalConstMem = 65536;            ///< Constant memory available on device in bytes
     prop->major = 1;                        ///< Major compute capability
     prop->minor = 3;                        ///< Minor compute capability

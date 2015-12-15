@@ -898,26 +898,26 @@ public:
      // Default copy ctor has to be overridden
     explicit TCPUArray(const TCPUArray &that)
     {
-        this->assign(&that);
+        assign(&that);
     }
     //////////////////////////////////////////////////////////////////////////
 
     explicit TCPUArray(const TArray<T> &that) : TArray<T>()
     {
-        this->assign(&that);
+        assign(&that);
     }
     //////////////////////////////////////////////////////////////////////////
 
     // Default = operator has to be overridden
     void operator=(const TCPUArray &that)
     {
-        this->assign(&that);
+        assign(&that);
     }
     //////////////////////////////////////////////////////////////////////////
 
     void operator=(const TArray<T> &that)
     {
-        this->assign(&that);
+        assign(&that);
     }
     //////////////////////////////////////////////////////////////////////////
 
@@ -1018,26 +1018,26 @@ public:
     // Default copy ctor has to be overridden
     explicit TGPUArray(const TGPUArray &that)
     {
-        this->assign(&that);
+        assign(&that);
     }
     //////////////////////////////////////////////////////////////////////////
 
     explicit TGPUArray(const TArray<T> &that) : TArray<T>()
     {
-        this->assign(&that);
+        assign(&that);
     }
     //////////////////////////////////////////////////////////////////////////
 
     // Default assignment operator has to be overridden
     void operator=(const TGPUArray &that)
     {
-        this->assign(&that);
+        assign(&that);
     }
     //////////////////////////////////////////////////////////////////////////
     
     void operator=(const TArray<T> &that)
     {
-        this->assign(&that);
+        assign(&that);
     }
     //////////////////////////////////////////////////////////////////////////
 
@@ -1045,7 +1045,7 @@ public:
     {
         TCPUArray<T> temp;
         temp.assign2dArr<M, N>(pData);
-        this->assign(&temp);
+        assign(&temp);
     }
 
     // Free allocated memory 
@@ -1355,7 +1355,7 @@ public:
     // Override default copy ctor
     explicit TBitmap(const TBitmap &that)
     {
-        this->assign(&that);
+        assign(&that);
         initHeader();
     }
     //////////////////////////////////////////////////////////////////////////
@@ -1363,7 +1363,7 @@ public:
     explicit TBitmap(const TArray<T> &that)
     {
         checkResizeValid(that.dims());
-        this->assign(&that);
+        assign(&that);
         initHeader();
     }
     //////////////////////////////////////////////////////////////////////////
@@ -1371,7 +1371,7 @@ public:
     // Override default = operator
     void operator=(const TBitmap &that)
     {
-        this->assign(&that);
+        assign(&that);
         initHeader();
     }
     //////////////////////////////////////////////////////////////////////////
@@ -1380,7 +1380,7 @@ public:
     void operator=(const TArray<T> &that)
     {
         checkResizeValid(that.dims());
-        this->assign(&that);
+        assign(&that);
         initHeader();
     }
     //////////////////////////////////////////////////////////////////////////    
