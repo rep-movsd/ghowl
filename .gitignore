@@ -1,0 +1,6 @@
+Bin/*
+*.opensdf
+*.sdf
+*.suo
+test/Debug/*
+test/Release/*
