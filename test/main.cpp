@@ -28,8 +28,7 @@ int main(int argc, char **argv)
     }
 
     cout << "Hit it to quit it..." << endl;
-    getchar();
-    
+
     return 0;
 }
 
