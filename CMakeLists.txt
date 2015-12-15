@@ -3,7 +3,7 @@ project(ghowl)
 
 option(test "Build tests." OFF)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 add_library(${CMAKE_PROJECT_NAME}
   src/ghowl.cpp
 )
